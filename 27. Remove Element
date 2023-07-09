@@ -1,0 +1,28 @@
+/*
+1.Initialize a counter variable cnt to keep track of the new length of the modified vector.
+2.Iterate through each element of the nums vector using the index i.
+3.Check if the current element, nums[i], is not equal to the target value val.
+4.If the condition is true, it means the element is not the target value, so we copy it to the position cnt in the vector.
+5.Increment cnt by 1 to move to the next position in the modified vector.
+6.Repeat steps 3-5 for all elements in the original vector.
+7.After the loop finishes, the modified vector will contain all elements except the target value.
+8.Return the value of cnt, which represents the new length of the vector with the target value removed.
+
+Time Com. :
+O(n)
+*/
+
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+         int cnt = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != val) {
+                nums[cnt] = nums[i];
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
