@@ -1,0 +1,55 @@
+/*
+54. Spiral Matrix
+Given an m x n matrix, return all elements of the matrix in spiral order.
+Apporoch:
+1. 
+*/
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> ans;
+        int row = matrix.size();
+        int col = matrix[0].size();
+        int top = 0, bottom = row - 1, left = 0, right = col - 1;
+        int total = row * col;
+
+        while (ans.size() < total) 
+        {
+            //  top row
+            for (int i = left; i <= right && ans.size() < total; i++) {
+                ans.push_back(matrix[top][i]);
+            }
+            top++;
+
+            // right column
+            for (int i = top; i <= bottom && ans.size() < total; i++) {
+                ans.push_back(matrix[i][right]);
+            }
+            right--;
+
+            // bottom row
+            for (int i = right; i >= left && ans.size() < total; i--) {
+                ans.push_back(matrix[bottom][i]);
+            }
+            bottom--;
+
+            //left column
+            for (int i = bottom; i >= top && ans.size() < total; i--) {
+                ans.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+
+        return ans;
+    }
+};
