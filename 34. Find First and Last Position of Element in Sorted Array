@@ -1,0 +1,68 @@
+/*Initialize the result vector with [-1, -1] to represent the indices of the first and last occurrences of the target value.
+1.Use the findFirstOccurrence function to find the index of the first occurrence of the target value. 
+2.It performs a binary search by updating low and high based on whether the mid element is greater or equal to the target value. 
+3.If a match is found, the first variable is updated.
+4.If a valid first index is found (not -1), use the findLastOccurrence function to find the index of the last occurrence of the target value.
+5.It performs a binary search by updating low and high based on whether the mid element is less or equal to the target value. 
+6.If a match is found, the last variable is updated.
+7.Update the result vector with the first and last occurrence indices if a valid first occurrence index is found.
+8.Return the result vector.
+
+Time Com:
+O(log(n))
+*/
+
+
+
+
+
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> result = {-1, -1};
+        int low = findFirstOccurrence(nums, target);
+        if (low != -1) {
+            int high = findLastOccurrence(nums, target);
+            result = {low, high};
+        }
+        return result;
+    }
+    
+private:
+    int findFirstOccurrence(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+        int first = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] >= target) {
+                high = mid - 1;
+                if (nums[mid] == target) {
+                    first = mid;
+                }
+            } else {
+                low = mid + 1;
+            }
+        }
+        return first;
+    }
+    
+    int findLastOccurrence(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+        int last = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] <= target) {
+                low = mid + 1;
+                if (nums[mid] == target) {
+                    last = mid;
+                }
+            } else {
+                high = mid - 1;
+            }
+        }
+        return last;
+    }
+};
