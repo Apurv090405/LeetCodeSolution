@@ -1,0 +1,30 @@
+/*
+Given an integer x, return true if x is a palindrome, and false otherwise.
+
+Apporoach:
+1. store the given number in another variable
+2. create the variable to store the sum of given number's digits.
+3. create the loop to perform the sum of digits of given number
+4. cheak the given number and sum of digits is equal then retuen true else return false.
+
+Time Compelxcity:
+O(n) where n is length of given number
+*/
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        long long num = x;
+        long long sum = 0;
+        while(x>0)
+        {
+            sum = (sum*10) + (x%10);
+            x/=10;
+        }
+        if(sum == num)
+        {
+            return true;
+        }
+        return false;
+    }
+};
