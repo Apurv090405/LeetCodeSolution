@@ -1,0 +1,52 @@
+/*
+
+Apporoch:
+1.Sort the input array in ascending order.
+2.Iterate through the array from index 0 to n - 2, fixing the first element of the potential triplet.
+3.Use two pointers, l and r, initially set to i + 1 and n - 1 respectively, to find the remaining two elements.
+4.While l is less than r, calculate the sum of the current triplet (sum = nums[i] + nums[l] + nums[r]).
+5.If the sum is zero, add the triplet to the result vector ans, increment l, and decrement r.
+6.To skip duplicates, if the current l is the same as the previous one, increment l until it finds a different element. Similarly, if the current r is the same as the previous one, decrement r until it finds a different element.
+7.If the sum is less than zero, increment l to increase the sum.
+8.If the sum is greater than zero, decrement r to decrease the sum.
+9.After the inner while loop ends, to skip duplicates for i, increment i until it finds a different element.
+10.Return the resulting vector ans containing all the unique triplets.
+
+Time Com. :
+O(n^2)
+*/
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> ans;
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<n-2; i++)
+        {
+            int l = i + 1;
+            int r = n - 1;
+            while(l < r)
+            {
+                int sum = nums[i]+nums[l]+nums[r];
+                if(sum==0)
+                {
+                    ans.push_back({nums[i],nums[l],nums[r]});
+                    l++;
+                    r--;
+                    while(l < r && nums[l] == nums[l-1]) 
+                        l++;
+                    while(l < r && nums[r] == nums[r+1])
+                        r--;
+                }
+                else if(sum < 0)
+                    l++;
+                else
+                    r--;
+            }
+            while( i + 1 < n-1 && nums[i] == nums[i + 1])
+                i++;
+        }
+        return ans;
+        }
+};
